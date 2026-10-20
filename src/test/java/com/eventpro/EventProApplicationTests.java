@@ -1,4 +1,4 @@
-package org.example.eventpro;
+package com.eventpro;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
