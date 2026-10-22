@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -17,8 +19,8 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorColumn(name = "type_utilisateur")
 public abstract class Utilisateur {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String nom;
 

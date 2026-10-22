@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -17,8 +18,8 @@ import java.util.List;
 @Builder
 public class Paiement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(unique = true)
     private String reference;
@@ -31,8 +32,8 @@ public class Paiement {
     @Enumerated(EnumType.STRING)
     private StatutPaiement statut;
 
-    @ManyToOne
-    @JoinColumn(name = "reservation_id")
+    @OneToOne
+    @JoinColumn(name = "reservation_id", unique = true)
     private Reservation reservation;
 
     @OneToMany(mappedBy = "paiement", cascade = CascadeType.ALL)
