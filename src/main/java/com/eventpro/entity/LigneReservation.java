@@ -31,7 +31,7 @@ public class LigneReservation {
 
     @ManyToOne
     @JoinColumn(name = "categorie_billet_id")
-    private CategorieBillet categorieBillet;
+    private TicketCategoriesPerEvent ticketCategoriesPerEvent;
 
     public BigDecimal calculerSousTotal() {
         return BigDecimal.ZERO;

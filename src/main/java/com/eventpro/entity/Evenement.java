@@ -28,6 +28,7 @@ public class Evenement {
     private LocalDateTime dateFin;
     private LocalDateTime dateOuvertureVente;
     private LocalDateTime dateClotureVente;
+    private Integer capacity;
 
     @Enumerated(EnumType.STRING)
     private StatutEvenement statut;
@@ -36,8 +37,10 @@ public class Evenement {
     @JoinColumn(name = "organisateur_id")
     private Organisateur organisateur;
 
-    @OneToMany(mappedBy = "evenement", cascade = CascadeType.ALL)
-    private List<CategorieBillet> categories = new ArrayList<>();
+    @OneToMany(mappedBy = "evenement", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<TicketCategoriesPerEvent> categories = new ArrayList<>();
+
     @OneToMany(mappedBy = "evenement", cascade = CascadeType.ALL)
     private List<Promotion> promotions = new ArrayList<>();
 

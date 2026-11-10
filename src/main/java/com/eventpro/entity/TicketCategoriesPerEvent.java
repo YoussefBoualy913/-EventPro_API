@@ -14,25 +14,32 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CategorieBillet {
+public class TicketCategoriesPerEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    private String nom;
 
     @Column(precision = 10, scale = 2)
     private BigDecimal prixUnitaire;
 
     private Integer quantiteTotale;
     private Integer quotaMaxParClient;
+    @Builder.Default
+    private Integer placesReservees = 0;
+
+    @Builder.Default
+    private Integer placesVendues = 0;
 
     @ManyToOne
     @JoinColumn(name = "evenement_id")
     private Evenement evenement;
 
-    @OneToMany(mappedBy = "categorieBillet", cascade = CascadeType.ALL)
-    private List<Billet> billets = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "ticketCategory_id")
+    private TicketCategory ticketCategory;
+
+    @OneToMany(mappedBy = "ticketCategoriesPerEvent", cascade = CascadeType.ALL)
+    private List<LigneReservation> ligneReservations = new ArrayList<>();
 
     public boolean verifierStock(int quantite) {
         return false;

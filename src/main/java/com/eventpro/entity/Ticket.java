@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Billet {
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -31,9 +31,7 @@ public class Billet {
     @JoinColumn(name = "ligne_reservation_id")
     private LigneReservation ligneReservation;
 
-    @ManyToOne
-    @JoinColumn(name = "categorie_billet_id")
-    private CategorieBillet categorieBillet;
+
 
     public boolean valider() {
         return false;

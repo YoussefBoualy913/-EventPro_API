@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,9 @@ public class Promotion {
     private LocalDateTime dateDebut;
     private LocalDateTime dateFin;
     private Integer limiteUtilisation;
-    private Integer nombreUtilisations;
+
+    @Builder.Default
+    private Integer nombreUtilisations = 0;
 
     @ManyToOne
     @JoinColumn(name = "evenement_id")
@@ -43,10 +46,41 @@ public class Promotion {
     private List<Reservation> reservation = new ArrayList<>();
 
     public boolean estValide() {
-        return false;
+
+        LocalDateTime maintenant = LocalDateTime.now();
+
+
+        if (maintenant.isBefore(dateDebut) || maintenant.isAfter(dateFin)) {
+            return false;
+        }
+
+        if (limiteUtilisation != null &&
+                nombreUtilisations >= limiteUtilisation) {
+            return false;
+        }
+
+        return true;
     }
 
-    public BigDecimal calculerReduction(BigDecimal m) {
+    public BigDecimal calculerReduction(BigDecimal montant) {
+
+        if (montant == null || montant.compareTo(BigDecimal.ZERO) <= 0) {
+            return BigDecimal.ZERO;
+        }
+
+        if (typeReduction == TypeReduction.PERCENTAGE) {
+
+            return montant
+                    .multiply(valeurReduction)
+                    .divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP);
+
+        }
+
+        if (typeReduction == TypeReduction.FIXED_AMOUNT) {
+
+            return valeurReduction.min(montant);
+        }
+
         return BigDecimal.ZERO;
     }
 }

@@ -1,6 +1,8 @@
 package com.eventpro.dto.response;
 
 import com.eventpro.entity.enums.StatutEvenement;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -23,6 +25,8 @@ public class EvenementResponse {
     private LocalDateTime dateOuvertureVente;
     private LocalDateTime dateClotureVente;
 
+    private Integer capacity;
+    @Enumerated(EnumType.STRING)
     private StatutEvenement statut;
 
     private UUID organisateurId;

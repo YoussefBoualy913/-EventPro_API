@@ -1,15 +1,15 @@
  package com.eventpro.dto.request;
 
 import com.eventpro.entity.enums.StatutEvenement;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
-@Getter
+ @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,5 +38,13 @@ public class EvenementRequest {
     @NotNull(message = "La date de clôture des ventes est obligatoire")
     private LocalDateTime dateClotureVente;
 
+    @NotNull(message = "La capacité est obligatoire")
+    @Min(value = 1, message = "La capacité doit être supérieure à 0")
+    private Integer capacity;
+
     private StatutEvenement statut;
+     @NotNull(message = "L'organisateur est obligatoire")
+    private UUID organisateurId;
+     @NotEmpty(message = "L'événement doit contenir au moins une catégorie")
+    private List<TicketCategoriesPerEventRequest> categories;
 }
