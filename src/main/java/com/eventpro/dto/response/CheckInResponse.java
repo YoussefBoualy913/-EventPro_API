@@ -1,6 +1,6 @@
 package com.eventpro.dto.response;
 
-import com.eventpro.entity.enums.StatutBillet;
+import com.eventpro.entity.enums.StatutTicket;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class CheckInResponse {
 
     private UUID billetId;
     private String code;
-    private StatutBillet statut;
+    private StatutTicket statut;
     private boolean valide;
     private String message;
 

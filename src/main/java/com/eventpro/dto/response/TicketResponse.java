@@ -1,6 +1,6 @@
 package com.eventpro.dto.response;
 
-import com.eventpro.entity.enums.StatutBillet;
+import com.eventpro.entity.enums.StatutTicket;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -18,7 +18,7 @@ public class TicketResponse {
     private String code;
     private LocalDateTime dateEmission;
     private LocalDateTime dateControle;
-    private StatutBillet statut;
+    private StatutTicket statut;
 
     private UUID ligneReservationId;
     private UUID categorieBilletId;

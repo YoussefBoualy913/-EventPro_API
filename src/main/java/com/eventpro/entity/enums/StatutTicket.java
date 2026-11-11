@@ -1,6 +1,6 @@
 package com.eventpro.entity.enums;
 
-public enum StatutBillet {
+public enum StatutTicket {
     VALID,
     USED,
     CANCELLED

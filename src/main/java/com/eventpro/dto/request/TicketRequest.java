@@ -1,6 +1,6 @@
 package com.eventpro.dto.request;
 
-import com.eventpro.entity.enums.StatutBillet;
+import com.eventpro.entity.enums.StatutTicket;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -24,7 +24,7 @@ public class TicketRequest {
     private LocalDateTime dateControle;
 
     @NotNull(message = "Le statut du billet est obligatoire")
-    private StatutBillet statut;
+    private StatutTicket statut;
 
     private UUID ligneReservationId;
 

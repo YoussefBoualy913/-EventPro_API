@@ -1,6 +1,6 @@
 package com.eventpro.entity;
 
-import com.eventpro.entity.enums.StatutBillet;
+import com.eventpro.entity.enums.StatutTicket;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +25,7 @@ public class Ticket {
     private LocalDateTime dateControle;
 
     @Enumerated(EnumType.STRING)
-    private StatutBillet statut;
+    private StatutTicket statut;
 
     @ManyToOne
     @JoinColumn(name = "ligne_reservation_id")
