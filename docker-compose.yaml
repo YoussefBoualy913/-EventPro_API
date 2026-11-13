@@ -32,7 +32,46 @@
       volumes:
         - eventpro_pgadmin_data:/var/lib/pgadmin
 
+    jenkins:
+      image: jenkins/jenkins:lts-jdk21
+      container_name: eventpro-jenkins
+      restart: unless-stopped
+      ports:
+        - "8081:8080"
+        - "50000:50000"
+      volumes:
+        - eventpro_jenkins_data:/var/jenkins_home
+
+    sonarqube:
+      image: sonarqube:community
+      container_name: eventpro-sonarqube
+      restart: unless-stopped
+      ports:
+        - "9000:9000"
+      volumes:
+        - eventpro_sonarqube_data:/opt/sonarqube/data
+        - eventpro_sonarqube_extensions:/opt/sonarqube/extensions
+        - eventpro_sonarqube_logs:/opt/sonarqube/logs
+
+    ngrok:
+      image: ngrok/ngrok:latest
+      container_name: eventpro-ngrok
+      restart: unless-stopped
+      environment:
+        NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+      command:
+        - "http"
+        - "http://jenkins:8080"
+      ports:
+        - "4040:4040"
+      depends_on:
+        - jenkins
+
   volumes:
     eventpro_postgres_data:
     eventpro_pgadmin_data:
+    eventpro_jenkins_data:
+    eventpro_sonarqube_data:
+    eventpro_sonarqube_extensions:
+    eventpro_sonarqube_logs:
 

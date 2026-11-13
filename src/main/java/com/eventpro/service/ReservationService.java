@@ -201,4 +201,9 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
+    public ReservationResponse getrservaiton(){
+      List<Reservation> reservations = reservationRepository.findAll();
+      return  reservationMapper.toResponse(reservations.stream().max(Comparator.comparing(Reservation::getMontantTotal)).orElseThrow());
+    }
+
 }

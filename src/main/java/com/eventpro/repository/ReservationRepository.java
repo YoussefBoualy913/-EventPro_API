@@ -31,4 +31,6 @@ public interface ReservationRepository
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT r FROM Reservation r WHERE r.id = :id")
     Optional<Reservation> findByIdForUpdate(@Param("id") UUID id);
+
+
 }
