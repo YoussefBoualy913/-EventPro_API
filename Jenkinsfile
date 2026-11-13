@@ -34,19 +34,20 @@ pipeline {
             }
         }
 
-       // 4. Analyse de la qualité du code
-       stage('SonarQube Analysis') {
-           steps {
-               withSonarQubeEnv('SonarQube-Local') {
-                   sh '''
-                       mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar \
-                         -Dsonar.projectKey=eventpro \
-                         -Dsonar.projectName=EventPro \
-                         -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                   '''
-               }
-           }
-       }
+        // 4. Analyse de la qualité du code
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube-Local') {
+                    sh '''
+                        mvn sonar:sonar \
+                        -Dsonar.projectKey=eventpro \
+                        -Dsonar.projectName=EventPro \
+                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+                    '''
+                }
+            }
+        }
+    }
 
     post {
         always {
